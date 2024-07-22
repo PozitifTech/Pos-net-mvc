@@ -12,8 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entity\" />
-    <Folder Include="Request\" />
-    <Folder Include="Response\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

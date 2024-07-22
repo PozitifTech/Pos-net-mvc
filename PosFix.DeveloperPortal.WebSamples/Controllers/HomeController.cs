@@ -251,6 +251,25 @@ namespace PosFix.DeveloperPortal.WebSamples.Controllers
             return View(Non3DPaymentRequest.Execute(request, settings));
         }
 
+        public ActionResult PostAuth()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult PostAuth(string orderId, string amount)
+        {
+            PostAuthRequest request = new();
+            request.OrderId = orderId;
+            request.Amount = amount;
+
+            request.Echo = "Echo";
+            request.Mode = settings.Mode;
+            request.ClientIp = "127.0.0.1";
+            return View(PostAuthRequest.Execute(request, settings));
+        }
+
         /// <summary>
         /// Ödeme sorgulama sayfasını temsil eder.
         /// </summary>

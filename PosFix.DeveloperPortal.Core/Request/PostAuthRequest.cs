@@ -13,6 +13,7 @@ namespace PosFix.DeveloperPortal.Core.Request
         public String OrderId { get; set; }
         public String Amount { get; set; }
         public String ClientIp { get; set; }
+
         public static PostAuthResponse Execute(PostAuthRequest request, Settings options)
         {
             options.TransactionDate = Helper.GetTransactionDateString();

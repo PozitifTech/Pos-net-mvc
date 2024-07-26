@@ -86,13 +86,26 @@ namespace PosFix.DeveloperPortal.WebSamples.Controllers
             return View();
         }
 
-        
+        /// <summary>
+        /// Ön Otorizasyon Açma İşlemi
+        /// </summary>
+        /// <returns></returns>
         public ActionResult PreAuth()
         {
             return View();
         }
 
-       
+        /// <summary>
+        /// Ön Otorizasyon Açma İşlemi
+        /// </summary>
+        /// <param name="nameSurname"></param>
+        /// <param name="cardNumber"></param>
+        /// <param name="cvc"></param>
+        /// <param name="month"></param>
+        /// <param name="year"></param>
+        /// <param name="amount"></param>
+        /// <param name="installment"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult PreAuth(string nameSurname, string cardNumber, string cvc, string month, string year, string amount, string installment)
         {
@@ -251,12 +264,21 @@ namespace PosFix.DeveloperPortal.WebSamples.Controllers
             return View(Non3DPaymentRequest.Execute(request, settings));
         }
 
+        /// <summary>
+        /// Ön Otorizasyon Kapama İşlemi
+        /// </summary>
+        /// <returns></returns>
         public ActionResult PostAuth()
         {
             return View();
         }
 
-
+        /// <summary>
+        /// Ön Otorizasyon Kapama İşlemi
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult PostAuth(string orderId, string amount)
         {

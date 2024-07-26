@@ -19,17 +19,11 @@ namespace PosFix.DeveloperPortal.Core.Request
         public String CardExpireYear { get; set; }
         public String Installment { get; set; }
         public String CardCvc { get; set; }
-
         public String VendorId { get; set; }
-
         public String UserId { get; set; }
-
         public String CardId { get; set; }
-
         public String WaitingConfirmation { get; set; }
-
         public List<Product> Products { get; set; }
-
         public Purchaser Purchaser { get; set; }
 
         public static PreAuthResponse Execute(PreAuthRequest request, Settings options)

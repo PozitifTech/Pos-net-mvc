@@ -73,7 +73,7 @@ Test kartlarımızda alınan hata kodları ve çözümleriyle ilgili detaylı bi
 ```c#
     Non3DPaymentRequest request = new();
     request.OrderId = Guid.NewGuid().ToString();
-    request.Amount = "10000";
+    request.Amount = "100";
     request.CardOwnerName = "Ahmet Veli";
     request.CardNumber = "5456165456165454";
     request.CardExpireMonth = "12";

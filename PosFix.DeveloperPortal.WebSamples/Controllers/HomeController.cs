@@ -53,8 +53,8 @@ namespace PosFix.DeveloperPortal.WebSamples.Controllers
             request.UserId = "";
             request.CardId = "";
             request.Language = "tr-TR";
-            request.SuccessUrl = "https://apitest.posfix.com.tr/rest/payment/threed/test/result";
-            request.FailUrl = "https://apitest.posfix.com.tr/rest/payment/threed/test/result";
+            request.SuccessUrl = "https://api.posfix.com.tr/rest/payment/threed/test/result";
+            request.FailUrl = "https://api.posfix.com.tr/rest/payment/threed/test/result";
 
             request.Purchaser = new();
             request.Purchaser.Name = "Ahmet";
@@ -84,6 +84,95 @@ namespace PosFix.DeveloperPortal.WebSamples.Controllers
             HttpResponseWritingExtensions.WriteAsync(this.Response, threeDform);
 
             return View();
+        }
+
+        /// <summary>
+        /// Ön Otorizasyon Açma İşlemi
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult PreAuth()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Ön Otorizasyon Açma İşlemi
+        /// </summary>
+        /// <param name="nameSurname"></param>
+        /// <param name="cardNumber"></param>
+        /// <param name="cvc"></param>
+        /// <param name="month"></param>
+        /// <param name="year"></param>
+        /// <param name="amount"></param>
+        /// <param name="installment"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult PreAuth(string nameSurname, string cardNumber, string cvc, string month, string year, string amount, string installment)
+        {
+            PreAuthRequest request = new();
+            request.OrderId = Guid.NewGuid().ToString();
+            request.Amount = amount;
+            request.CardOwnerName = nameSurname;
+            request.CardNumber = cardNumber;
+            request.CardExpireMonth = month;
+            request.CardExpireYear = year;
+            request.Installment = installment;
+            request.CardCvc = cvc;
+
+            request.Echo = "Echo";
+            request.Mode = settings.Mode;
+            request.ThreeD = "false";
+            request.CardId = "";
+            request.UserId = "";
+
+            request.Purchaser = new();
+            request.Purchaser.Name = "Ahmet";
+            request.Purchaser.SurName = "Veli";
+            request.Purchaser.BirthDate = "1986-07-11";
+            request.Purchaser.Email = "ahmet@veli.com";
+            request.Purchaser.GsmPhone = "5881231212";
+            request.Purchaser.IdentityNumber = "12345678901";
+            request.Purchaser.ClientIp = "127.0.0.1";
+
+            request.Purchaser.InvoiceAddress = new();
+            request.Purchaser.InvoiceAddress.Name = "Ahmet";
+            request.Purchaser.InvoiceAddress.SurName = "Veli";
+            request.Purchaser.InvoiceAddress.Address = "Mevlüt Pehlivan Mah. PosFix Plaza Şişli";
+            request.Purchaser.InvoiceAddress.ZipCode = "34782";
+            request.Purchaser.InvoiceAddress.CityCode = "34";
+            request.Purchaser.InvoiceAddress.IdentityNumber = "12345678901";
+            request.Purchaser.InvoiceAddress.CountryCode = "TR";
+            request.Purchaser.InvoiceAddress.TaxNumber = "123456";
+            request.Purchaser.InvoiceAddress.TaxOffice = "Kozyatağı";
+            request.Purchaser.InvoiceAddress.CompanyName = "PosFix";
+            request.Purchaser.InvoiceAddress.PhoneNumber = "2122222222";
+
+            request.Purchaser.ShippingAddress = new();
+            request.Purchaser.ShippingAddress.Name = "Ahmet";
+            request.Purchaser.ShippingAddress.SurName = "Veli";
+            request.Purchaser.ShippingAddress.Address = "Mevlüt Pehlivan Mah. PosFix Plaza Şişli";
+            request.Purchaser.ShippingAddress.ZipCode = "34782";
+            request.Purchaser.ShippingAddress.CityCode = "34";
+            request.Purchaser.ShippingAddress.IdentityNumber = "12345678901";
+            request.Purchaser.ShippingAddress.CountryCode = "TR";
+            request.Purchaser.ShippingAddress.PhoneNumber = "2122222222";
+
+            request.Products = new List<Product>();
+            Product p = new();
+            p.Title = "Telefon";
+            p.Code = "TLF0001";
+            p.Price = "5000"; //50.00 TL
+            p.Quantity = 1;
+            request.Products.Add(p);
+
+            p = new();
+            p.Title = "Bilgisayar";
+            p.Code = "BLG0001";
+            p.Price = "5000"; //50.00 TL
+            p.Quantity = 1;
+            request.Products.Add(p);
+
+            return View(PreAuthRequest.Execute(request, settings));
         }
 
         /// <summary>
@@ -173,6 +262,34 @@ namespace PosFix.DeveloperPortal.WebSamples.Controllers
             request.Products.Add(p);
 
             return View(Non3DPaymentRequest.Execute(request, settings));
+        }
+
+        /// <summary>
+        /// Ön Otorizasyon Kapama İşlemi
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult PostAuth()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Ön Otorizasyon Kapama İşlemi
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult PostAuth(string orderId, string amount)
+        {
+            PostAuthRequest request = new();
+            request.OrderId = orderId;
+            request.Amount = amount;
+
+            request.Echo = "Echo";
+            request.Mode = settings.Mode;
+            request.ClientIp = "127.0.0.1";
+            return View(PostAuthRequest.Execute(request, settings));
         }
 
         /// <summary>
@@ -399,7 +516,7 @@ namespace PosFix.DeveloperPortal.WebSamples.Controllers
             request.OrderId = Guid.NewGuid().ToString();
             request.Echo = "Echo"; // Cevap anında geri gelecek işlemi ayırt etmeye yarayacak alan
             request.Mode = settings.Mode;
-            request.Amount = "10000"; // 100.00 TL
+            request.Amount = "100"; // 100.00 TL
             request.CardOwnerName = "";
             request.CardNumber = "";
             request.CardExpireMonth = "";
@@ -655,8 +772,8 @@ namespace PosFix.DeveloperPortal.WebSamples.Controllers
             CheckoutFormCreateRequest request = new();
             request.OrderId = Guid.NewGuid().ToString();
             request.Version = settings.Version;
-            request.Amount = 10000;
-            request.CallbackUrl = "https://apitest.posfix.com.tr/rest/payment/threed/test/result";
+            request.Amount = 100;
+            request.CallbackUrl = "https://api.posfix.com.tr/rest/payment/threed/test/result";
             request.VendorId = "10100";
             request.Threed = "false";
             request.AllowedInstallments = new HashSet<string>{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};

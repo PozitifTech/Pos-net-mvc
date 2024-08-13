@@ -12,7 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entity\" />
-    <Folder Include="Request\" />
+	<Folder Include="Request\" />
     <Folder Include="Response\" />
   </ItemGroup>
   <ItemGroup>

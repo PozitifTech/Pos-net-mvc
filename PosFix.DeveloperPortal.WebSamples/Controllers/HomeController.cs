@@ -53,8 +53,8 @@ namespace PosFix.DeveloperPortal.WebSamples.Controllers
             request.UserId = "";
             request.CardId = "";
             request.Language = "tr-TR";
-            request.SuccessUrl = "https://apitest.posfix.com.tr/rest/payment/threed/test/result";
-            request.FailUrl = "https://apitest.posfix.com.tr/rest/payment/threed/test/result";
+            request.SuccessUrl = "https://api.posfix.com.tr/rest/payment/threed/test/result";
+            request.FailUrl = "https://api.posfix.com.tr/rest/payment/threed/test/result";
 
             request.Purchaser = new();
             request.Purchaser.Name = "Ahmet";
@@ -516,7 +516,7 @@ namespace PosFix.DeveloperPortal.WebSamples.Controllers
             request.OrderId = Guid.NewGuid().ToString();
             request.Echo = "Echo"; // Cevap anında geri gelecek işlemi ayırt etmeye yarayacak alan
             request.Mode = settings.Mode;
-            request.Amount = "10000"; // 100.00 TL
+            request.Amount = "100"; // 100.00 TL
             request.CardOwnerName = "";
             request.CardNumber = "";
             request.CardExpireMonth = "";
@@ -772,8 +772,8 @@ namespace PosFix.DeveloperPortal.WebSamples.Controllers
             CheckoutFormCreateRequest request = new();
             request.OrderId = Guid.NewGuid().ToString();
             request.Version = settings.Version;
-            request.Amount = 10000;
-            request.CallbackUrl = "https://apitest.posfix.com.tr/rest/payment/threed/test/result";
+            request.Amount = 100;
+            request.CallbackUrl = "https://api.posfix.com.tr/rest/payment/threed/test/result";
             request.VendorId = "10100";
             request.Threed = "false";
             request.AllowedInstallments = new HashSet<string>{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};

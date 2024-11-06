@@ -19,4 +19,10 @@
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\lib\bootstrap\dist\css\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Update="Views\Home\PreAuth.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

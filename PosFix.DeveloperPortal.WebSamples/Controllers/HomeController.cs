@@ -265,6 +265,34 @@ namespace PosFix.DeveloperPortal.WebSamples.Controllers
         }
 
         /// <summary>
+        /// Ön Otorizasyon Kapama İşlemi
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult PostAuth()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Ön Otorizasyon Kapama İşlemi
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult PostAuth(string orderId, string amount)
+        {
+            PostAuthRequest request = new();
+            request.OrderId = orderId;
+            request.Amount = amount;
+
+            request.Echo = "Echo";
+            request.Mode = settings.Mode;
+            request.ClientIp = "127.0.0.1";
+            return View(PostAuthRequest.Execute(request, settings));
+        }
+
+        /// <summary>
         /// Ödeme sorgulama sayfasını temsil eder.
         /// </summary>
         /// <returns></returns>

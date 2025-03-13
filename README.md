@@ -1,8 +1,6 @@
 # PosFix .Net Kütüphanesi
 
 PosFix .Net Client Kütüphanesidir. PosFix API'lerine çok hızlı bir şekilde bağlanmanızı sağlar.
-[https://www.posfix.com.tr](https://www.posfix.com.tr) adresimizden mağaza başvurusu yaparak
-hesabınızı açabilirsiniz.
 
 ## Entegrasyon sürecinde dikkat edilecek noktalar
 
